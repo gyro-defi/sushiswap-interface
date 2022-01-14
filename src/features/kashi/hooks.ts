@@ -35,13 +35,15 @@ const BLACKLISTED_ORACLES = ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812']
 
 export function useKashiPairAddresses(): string[] {
   const bentoBoxContract = useBentoBoxContract()
+  console.log({ bentoBoxContract })
   const { chainId } = useActiveWeb3React()
   const useEvents = chainId && chainId !== ChainId.BSC && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
   const allTokens = useAllTokens()
+  // console.log({ allTokens })
   const events = useQueryFilter({
     chainId,
     contract: bentoBoxContract,
-    event: bentoBoxContract && bentoBoxContract.filters.LogDeploy(KASHI_ADDRESS[chainId]),
+    event: bentoBoxContract && bentoBoxContract.filters.LogDeploy('0x9f6C8d3f99868C6a1Cfe37080961C766E940Bf8A'),
     shouldFetch: useEvents && featureEnabled(Feature.KASHI, chainId),
   })
   const clones = useClones({ chainId, shouldFetch: !useEvents })
@@ -56,11 +58,14 @@ export function useKashiPairAddresses(): string[] {
       if (
         BLACKLISTED_TOKENS.includes(collateral) ||
         BLACKLISTED_TOKENS.includes(asset) ||
-        BLACKLISTED_ORACLES.includes(oracle) ||
-        !validateChainlinkOracleData(chainId, allTokens[collateral], allTokens[asset], oracleData)
+        BLACKLISTED_ORACLES.includes(oracle)
+        // || !validateChainlinkOracleData(chainId, allTokens[collateral], allTokens[asset], oracleData)
       ) {
+        console.log({ previousValue })
         return previousValue
       }
+      console.log({ currentValue })
+
       return [...previousValue, currentValue.address]
     } catch (error) {
       return previousValue
@@ -75,7 +80,10 @@ export function useKashiPairs(addresses = []) {
 
   const wnative = WNATIVE_ADDRESS[chainId]
 
-  const currency = USD[chainId]
+  const currency =
+    chainId === ChainId.BSC_TESTNET
+      ? new Token(97, '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd', 18, 'USDT')
+      : USD[chainId]
 
   const allTokens = useAllTokens()
 
@@ -90,8 +98,11 @@ export function useKashiPairs(addresses = []) {
     }
     return Array.from(
       pollKashiPairs?.reduce((previousValue, currentValue) => {
-        const asset = allTokens[currentValue.asset]
-        const collateral = allTokens[currentValue.collateral]
+        const asset = new Token(97, currentValue.asset, 18, 'USDT')
+        const collateral = new Token(97, currentValue.collateral, 18, 'gGYRO')
+        console.log({ asset })
+        console.log({ collateral })
+
         return previousValue.add(asset).add(collateral)
       }, new Set([currency]))
     )
@@ -130,6 +141,11 @@ export function useKashiPairs(addresses = []) {
           strategy,
           usd,
           symbol,
+          tokenInfo: {
+            ...currentValue,
+            logoURI:
+              'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x4922a015c4407F87432B179bb209e125432E4a2A/logo.png',
+          },
         },
       }
     }, {})
@@ -140,14 +156,17 @@ export function useKashiPairs(addresses = []) {
     }
     return addresses.reduce((previousValue, currentValue, i) => {
       if (chainId && pairTokens && balances) {
+        console.log({ pairTokens })
         // Hack until we instantiate entity here...
         const pair = Object.assign({}, pollKashiPairs?.[i])
 
         pair.address = currentValue
-        pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
+        // pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
         pair.asset = pairTokens[pair.asset]
-        pair.collateral = pairTokens[pair.collateral]
+        console.log({ collateral: pair.collateral })
 
+        pair.collateral = pairTokens[pair.collateral]
+        console.log({ collateral: pair.collateral })
         pair.elapsedSeconds = BigNumber.from(Date.now()).div('1000').sub(pair.accrueInfo.lastAccrued)
 
         // Interest per year at last accrue, this will apply during the next accrue

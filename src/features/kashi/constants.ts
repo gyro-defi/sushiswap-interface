@@ -5,6 +5,7 @@ export const KASHI_NETWORKS = [
   ChainId.MATIC,
   ChainId.XDAI,
   ChainId.BSC,
+  ChainId.BSC_TESTNET,
   ChainId.ARBITRUM,
   ChainId.HECO,
 ]

@@ -134,8 +134,8 @@ export function useBoringHelperContract(): Contract | null {
   // TODO ramin update in sdk
   return useContract(
     chainId
-      ? chainId === ChainId.KOVAN
-        ? '0x5bd6e4eFA335192FDA5D6B42a344ccA3d45894B8'
+      ? chainId === ChainId.BSC_TESTNET
+        ? '0x11Ca5375AdAfd6205E41131A4409f182677996E6'
         : BORING_HELPER_ADDRESS[chainId]
       : undefined,
     BORING_HELPER_ABI,
@@ -145,7 +145,15 @@ export function useBoringHelperContract(): Contract | null {
 
 export function useMulticall2Contract() {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MULTICALL2_ADDRESS[chainId], MULTICALL2_ABI, false)
+  return useContract(
+    chainId
+      ? chainId === ChainId.BSC_TESTNET
+        ? '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576'
+        : MULTICALL2_ADDRESS[chainId]
+      : undefined,
+    MULTICALL2_ABI,
+    false
+  )
 }
 
 export function useSushiContract(withSignerIfPossible = true): Contract | null {
