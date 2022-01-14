@@ -34,29 +34,27 @@ export default function PairTools({ pair }) {
 
   return (
     <div className="flex flex-row flex-shrink space-x-2">
-      <QuestionHelper text={'Sync Market APR to Supply APR'}>
-        <Button color="gradient" variant="outlined" size="xs" className="w-full" onClick={() => onCook(pair, onAccrue)}>
-          Accrue
-        </Button>
-      </QuestionHelper>
-      <QuestionHelper
-        text={
-          <div>
-            <div>Update the exchange rate</div>
-            <div>Current deviation: {formatPercent(priceChange)}</div>
-          </div>
-        }
+      <Button color="gradient" variant="outlined" size="xs" className="w-full" onClick={() => onCook(pair, onAccrue)}>
+        Accrue
+        <QuestionHelper text={'Sync Market APR to Supply APR'}></QuestionHelper>
+      </Button>
+      <Button
+        color="gradient"
+        variant="outlined"
+        size="xs"
+        className="w-full"
+        onClick={() => onCook(pair, onUpdatePrice)}
       >
-        <Button
-          color="gradient"
-          variant="outlined"
-          size="xs"
-          className="w-full"
-          onClick={() => onCook(pair, onUpdatePrice)}
-        >
-          Update Price
-        </Button>
-      </QuestionHelper>
+        Update Price
+        <QuestionHelper
+          text={
+            <div>
+              <div>Update the exchange rate</div>
+              <div>Current deviation: {formatPercent(priceChange)}</div>
+            </div>
+          }
+        ></QuestionHelper>
+      </Button>
     </div>
   )
 }
