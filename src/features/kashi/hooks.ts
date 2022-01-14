@@ -59,10 +59,9 @@ export function useKashiPairAddresses(): string[] {
         BLACKLISTED_ORACLES.includes(oracle)
         // || !validateChainlinkOracleData(chainId, allTokens[collateral], allTokens[asset], oracleData)
       ) {
-        console.log({ previousValue })
         return previousValue
       }
-      console.log({ currentValue })
+      // console.log({ currentValue })
 
       return [...previousValue, currentValue.address]
     } catch (error) {
@@ -81,13 +80,13 @@ export function useKashiPairs(addresses = []) {
   const currency = USD[chainId]
 
   const allTokens = useAllTokens()
-  console.log({ allTokens })
+  // console.log({ allTokens })
 
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
 
   // TODO: Replace
   const pollKashiPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs)?.result?.[0]
-  console.log({ pollKashiPairs })
+
   const tokens = useMemo<Token[]>(() => {
     if (!pollKashiPairs) {
       return []
@@ -96,8 +95,8 @@ export function useKashiPairs(addresses = []) {
       pollKashiPairs?.reduce((previousValue, currentValue) => {
         const asset = allTokens[currentValue.asset]
         const collateral = allTokens[currentValue.collateral]
-        console.log({ asset })
-        console.log({ collateral })
+        // console.log({ asset })
+        // console.log({ collateral })
 
         return previousValue.add(asset).add(collateral)
       }, new Set([currency]))
@@ -147,17 +146,15 @@ export function useKashiPairs(addresses = []) {
     }
     return addresses.reduce((previousValue, currentValue, i) => {
       if (chainId && pairTokens && balances) {
-        console.log({ pairTokens })
+        // console.log({ pairTokens })
         // Hack until we instantiate entity here...
         const pair = Object.assign({}, pollKashiPairs?.[i])
-
+        console.log({ pair })
         pair.address = currentValue
-        // pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
+        pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
         pair.asset = pairTokens[pair.asset]
-        console.log({ collateral: pair.collateral })
-
         pair.collateral = pairTokens[pair.collateral]
-        console.log({ collateral: pair.collateral })
+
         pair.elapsedSeconds = BigNumber.from(Date.now()).div('1000').sub(pair.accrueInfo.lastAccrued)
 
         // Interest per year at last accrue, this will apply during the next accrue

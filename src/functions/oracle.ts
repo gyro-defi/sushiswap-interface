@@ -2,14 +2,16 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { AddressZero } from '@ethersproject/constants'
 import { ChainId, CHAINLINK_ORACLE_ADDRESS } from '@sushiswap/core-sdk'
 import { CHAINLINK_PRICE_FEED_MAP } from 'app/config/oracles/chainlink'
-import { ChainlinkOracle } from 'app/entities/oracles'
+import { ChainlinkOracle, PcsOracle } from 'app/entities/oracles'
 import { IOracle } from 'app/interfaces'
 
 import { e10 } from './math'
 
 export function getOracle(chainId: ChainId, address: string, data: string): IOracle {
-  if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId].toLowerCase()) {
+  if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId]?.toLowerCase()) {
     return new ChainlinkOracle(chainId, address, data)
+  } else {
+    return new PcsOracle(chainId, address, data)
   }
 }
 
