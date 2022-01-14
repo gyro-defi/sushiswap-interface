@@ -2146,6 +2146,22 @@
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
+"@gyro-defi/sushiswap-core-sdk@^1.0.0-gyro.3":
+  version "1.0.0-gyro.3"
+  resolved "https://registry.yarnpkg.com/@gyro-defi/sushiswap-core-sdk/-/sushiswap-core-sdk-1.0.0-gyro.3.tgz#a039e49d36890f9abe1d7456d5945cfc4e026d98"
+  integrity sha512-ZD2VeDmeKbzDqebTz5CgzqzAqhhYWdssKMWGHswIRnbfg+QfFvagtdr7VanVefedf6Hx2MPX/DJMpngBmy8m3A==
+  dependencies:
+    "@ethersproject/address" "^5.4.0"
+    "@ethersproject/bignumber" "^5.4.0"
+    "@ethersproject/providers" "^5.4.0"
+    "@ethersproject/solidity" "^5.4.0"
+    big.js "^6.1.1"
+    decimal.js-light "^2.5.0"
+    jsbi "^4.1.0"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.0"
+    toformat "^2.0.0"
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"

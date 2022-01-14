@@ -1,5 +1,5 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
-import { USD } from '@sushiswap/core-sdk'
+import { USD } from '@gyro-defi/sushiswap-core-sdk'
 import {
   FACTOR_PRECISION,
   FULL_UTILIZATION_MINUS_MAX,
@@ -81,7 +81,7 @@ export function getUSDString(amount: BigNumberish, token: any): string {
   return BigNumber.from(amount)
     .mul(token.usd)
     .div(e10(token?.decimals ? token.decimals : token.tokenInfo.decimals))
-    .toFixed(18)
+    .toFixed(USD[token?.chainId ? token.chainId : token.tokenInfo.chainId].decimals)
 }
 
 export function easyAmount(

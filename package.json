@@ -55,6 +55,7 @@
     "@ethersproject/units": "^5.4.0",
     "@fontsource/dm-sans": "^4.5.0",
     "@gnosis.pm/safe-apps-web3-react": "^0.6.0",
+    "@gyro-defi/sushiswap-core-sdk": "^1.0.0-gyro.3",
     "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.0",
     "@hookform/resolvers": "^2.8.5",

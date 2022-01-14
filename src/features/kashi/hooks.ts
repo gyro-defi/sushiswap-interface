@@ -2,7 +2,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { ChainId, KASHI_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS } from '@sushiswap/core-sdk'
+import { ChainId, KASHI_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS } from '@gyro-defi/sushiswap-core-sdk'
 import { Fraction } from 'app/entities'
 import { Feature } from 'app/enums'
 import {
@@ -35,7 +35,6 @@ const BLACKLISTED_ORACLES = ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812']
 
 export function useKashiPairAddresses(): string[] {
   const bentoBoxContract = useBentoBoxContract()
-  console.log({ bentoBoxContract })
   const { chainId } = useActiveWeb3React()
   const useEvents = chainId && chainId !== ChainId.BSC && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
   const allTokens = useAllTokens()
@@ -43,7 +42,7 @@ export function useKashiPairAddresses(): string[] {
   const events = useQueryFilter({
     chainId,
     contract: bentoBoxContract,
-    event: bentoBoxContract && bentoBoxContract.filters.LogDeploy('0x9f6C8d3f99868C6a1Cfe37080961C766E940Bf8A'),
+    event: bentoBoxContract && bentoBoxContract.filters.LogDeploy(KASHI_ADDRESS[chainId]),
     shouldFetch: useEvents && featureEnabled(Feature.KASHI, chainId),
   })
   const clones = useClones({ chainId, shouldFetch: !useEvents })
