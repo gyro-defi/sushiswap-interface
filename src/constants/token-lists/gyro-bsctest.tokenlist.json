@@ -1,0 +1,38 @@
+{
+    "name": "GYRO BSC Testnet List",
+    "timestamp": "2021-01-05T20:47:02.923Z",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "tags": {},
+    "logoURI": "ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir",
+    "keywords": ["gyro"],
+    "tokens": [
+        {
+          "name": "GYRO",
+          "symbol": "GYRO",
+          "address": "0xc67bD01d0B9585b6A5250F0cf7De42566c3186D9",
+          "chainId": 97,
+          "decimals": 9,
+          "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/0x1B239ABe619e74232c827FBE5E49a4C072bD869D/logo.png"
+        },
+        {
+          "name": "Governance GYRO",
+          "symbol": "gGYRO",
+          "address": "0x60290Cf09907E9cee35dadbCAc843788086f65B8",
+          "chainId": 97,
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/0x0E8D5504bF54D9E44260f8d153EcD5412130CaBb/logo.png"
+        },
+        {
+          "name": "USDT Token",
+          "symbol": "USDT",
+          "address": "0xDAb5D4634DA56f3d5E84DC9E908BF9F7b8610E27",
+          "chainId": 97,
+          "decimals": 18,
+          "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/binance/assets/USDT-6D8/logo.png"
+        }
+    ]
+  }

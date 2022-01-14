@@ -37,8 +37,7 @@ export function useKashiPairAddresses(): string[] {
   const bentoBoxContract = useBentoBoxContract()
   const { chainId } = useActiveWeb3React()
   const useEvents = chainId && chainId !== ChainId.BSC && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
-  const allTokens = useAllTokens()
-  // console.log({ allTokens })
+  // const allTokens = useAllTokens()
   const events = useQueryFilter({
     chainId,
     contract: bentoBoxContract,
@@ -79,26 +78,24 @@ export function useKashiPairs(addresses = []) {
 
   const wnative = WNATIVE_ADDRESS[chainId]
 
-  const currency =
-    chainId === ChainId.BSC_TESTNET
-      ? new Token(97, '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd', 18, 'USDT')
-      : USD[chainId]
+  const currency = USD[chainId]
 
   const allTokens = useAllTokens()
+  console.log({ allTokens })
 
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
 
   // TODO: Replace
   const pollKashiPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs)?.result?.[0]
-
+  console.log({ pollKashiPairs })
   const tokens = useMemo<Token[]>(() => {
     if (!pollKashiPairs) {
       return []
     }
     return Array.from(
       pollKashiPairs?.reduce((previousValue, currentValue) => {
-        const asset = new Token(97, currentValue.asset, 18, 'USDT')
-        const collateral = new Token(97, currentValue.collateral, 18, 'gGYRO')
+        const asset = allTokens[currentValue.asset]
+        const collateral = allTokens[currentValue.collateral]
         console.log({ asset })
         console.log({ collateral })
 
@@ -140,11 +137,6 @@ export function useKashiPairs(addresses = []) {
           strategy,
           usd,
           symbol,
-          tokenInfo: {
-            ...currentValue,
-            logoURI:
-              'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x4922a015c4407F87432B179bb209e125432E4a2A/logo.png',
-          },
         },
       }
     }, {})
