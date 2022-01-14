@@ -149,7 +149,6 @@ export function useKashiPairs(addresses = []) {
         // console.log({ pairTokens })
         // Hack until we instantiate entity here...
         const pair = Object.assign({}, pollKashiPairs?.[i])
-        console.log({ pair })
         pair.address = currentValue
         pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
         pair.asset = pairTokens[pair.asset]
