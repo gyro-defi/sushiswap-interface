@@ -40,22 +40,22 @@ export const DesktopNav: FC<DesktopNavProps> = ({ mobileMenuOpen }) => {
             <Image src="/images/logo.svg" alt="Sushi logo" width="24px" height="24px" />
           </div>
           <div className="flex space-x-1.5 hidden sm:block">
-            <NavLink
+            {/* <NavLink
               href={chainId && featureEnabled(Feature.TRIDENT, chainId) ? '/trident/swap' : '/swap'}
               activeClassName={ACTIVE_NAV_LINK_CLASS}
             >
               <a id="swap-nav-link" className={NAV_BASE_CLASS}>
                 {i18n._(t`Swap`)}
               </a>
-            </NavLink>
+            </NavLink> */}
 
-            {chainId && featureEnabled(Feature.TRIDENT, chainId) && (
+            {/* {chainId && featureEnabled(Feature.TRIDENT, chainId) && (
               <NavLink href="/trident/pools" activeClassName={ACTIVE_NAV_LINK_CLASS}>
                 <a id="trident-nav-link" className={NAV_BASE_CLASS}>
                   {i18n._(t`Trident`)}
                 </a>
               </NavLink>
-            )}
+            )} */}
 
             {chainId && featureEnabled(Feature.TRIDENT, chainId) && (
               <NavLink href="/trident/balances/wallet" activeClassName={ACTIVE_NAV_LINK_CLASS}>
@@ -65,13 +65,13 @@ export const DesktopNav: FC<DesktopNavProps> = ({ mobileMenuOpen }) => {
               </NavLink>
             )}
 
-            <NavLink href="/pool" activeClassName={ACTIVE_NAV_LINK_CLASS}>
+            {/* <NavLink href="/pool" activeClassName={ACTIVE_NAV_LINK_CLASS}>
               <a id="pool-nav-link" className={NAV_BASE_CLASS}>
                 {i18n._(t`Pool`)}
               </a>
-            </NavLink>
+            </NavLink> */}
 
-            {chainId &&
+            {/* {chainId &&
               (featureEnabled(Feature.TRIDENT, chainId) ? (
                 <NavLink href="/trident/migrate" activeClassName={ACTIVE_NAV_LINK_CLASS}>
                   <a id="trident-migrate-nav-link" className={NAV_BASE_CLASS}>
@@ -86,7 +86,7 @@ export const DesktopNav: FC<DesktopNavProps> = ({ mobileMenuOpen }) => {
                     </a>
                   </NavLink>
                 )
-              ))}
+              ))} */}
 
             {chainId && featureEnabled(Feature.LIQUIDITY_MINING, chainId) && (
               <NavLink href="/farm" activeClassName={ACTIVE_NAV_LINK_CLASS}>

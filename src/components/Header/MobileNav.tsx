@@ -18,19 +18,19 @@ export const MobileNav: FC = () => {
   return (
     <Popover.Panel className="sm:hidden">
       <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
-        <Link href={chainId && featureEnabled(Feature.TRIDENT, chainId) ? '/trident/swap' : '/swap'}>
+        {/* <Link href={chainId && featureEnabled(Feature.TRIDENT, chainId) ? '/trident/swap' : '/swap'}>
           <a id="swap-nav-link" className={NAV_BASE_CLASS}>
             {i18n._(t`Swap`)}
           </a>
-        </Link>
+        </Link> */}
 
-        {chainId && featureEnabled(Feature.TRIDENT, chainId) && (
+        {/* {chainId && featureEnabled(Feature.TRIDENT, chainId) && (
           <Link href="/trident/pools">
             <a id="swap-nav-link" className={NAV_BASE_CLASS}>
               {i18n._(t`Trident`)}
             </a>
           </Link>
-        )}
+        )} */}
 
         <Link href="/trident/balances/wallet">
           <a id="swap-nav-link" className={NAV_BASE_CLASS}>
@@ -38,17 +38,17 @@ export const MobileNav: FC = () => {
           </a>
         </Link>
 
-        <Link href="/pool">
+        {/* <Link href="/pool">
           <a id="pool-nav-link" className={NAV_BASE_CLASS}>
             {i18n._(t`Pool`)}
           </a>
-        </Link>
+        </Link> */}
 
-        <Link href="/migrate">
+        {/* <Link href="/migrate">
           <a id="migrate-nav-link" className={NAV_BASE_CLASS}>
             {i18n._(t`Migrate`)}
           </a>
-        </Link>
+        </Link> */}
 
         {chainId && featureEnabled(Feature.LIQUIDITY_MINING, chainId) && (
           <Link href="/farm">

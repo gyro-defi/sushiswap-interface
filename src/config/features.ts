@@ -26,7 +26,7 @@ const features: FeatureMap = {
     Feature.TRIDENT,
   ],
   [ChainId.BSC]: [Feature.AMM, Feature.BENTOBOX, Feature.KASHI, Feature.MIGRATE, Feature.ANALYTICS],
-  [ChainId.BSC_TESTNET]: [Feature.AMM, Feature.BENTOBOX, Feature.KASHI],
+  [ChainId.BSC_TESTNET]: [Feature.BENTOBOX, Feature.KASHI, Feature.TRIDENT],
   [ChainId.FANTOM]: [Feature.AMM, Feature.ANALYTICS],
   [ChainId.FANTOM_TESTNET]: [Feature.AMM],
   [ChainId.MATIC]: [

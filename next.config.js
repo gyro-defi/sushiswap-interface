@@ -50,7 +50,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/swap',
+        destination: '/lend',
         permanent: true,
       },
     ]
@@ -126,8 +126,8 @@ const nextConfig = {
     defaultLocale: sourceLocale,
   },
   network: {
-    chainIds: [ChainId.ETHEREUM, ChainId.ARBITRUM],
-    defaultChainId: ChainId.ETHEREUM,
+    chainIds: [ChainId.ETHEREUM, ChainId.ARBITRUM, ChainId.BSC_TESTNET],
+    defaultChainId: ChainId.BSC_TESTNET,
     domains: [
       {
         domain: 'sushi.com',
@@ -136,6 +136,10 @@ const nextConfig = {
       {
         domain: 'arbitrum.sushi.com',
         defaultChainId: ChainId.ARBITRUM,
+      },
+      {
+        domain: 'kashi.gyro.money',
+        defaultChainId: ChainId.BSC_TESTNET,
       },
     ],
   },
