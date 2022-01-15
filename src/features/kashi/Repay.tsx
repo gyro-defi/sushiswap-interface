@@ -72,11 +72,11 @@ export default function Repay({ pair }: RepayProps) {
     displayRepayValue.toBigNumber(pair.asset.tokenInfo.decimals)
   )
 
-  const nextMinCollateralOracle = nextUserBorrowAmount.mulDiv(pair.oracleExchangeRate, e10(16).mul('75'))
-  const nextMinCollateralSpot = nextUserBorrowAmount.mulDiv(pair.spotExchangeRate, e10(16).mul('75'))
+  const nextMinCollateralOracle = nextUserBorrowAmount.mulDiv(pair.oracleExchangeRate, e10(16).mul('67'))
+  const nextMinCollateralSpot = nextUserBorrowAmount.mulDiv(pair.spotExchangeRate, e10(16).mul('67'))
   const nextMinCollateralStored = nextUserBorrowAmount.mulDiv(
     displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate,
-    e10(16).mul('75')
+    e10(16).mul('67')
   )
   const nextMinCollateralMinimum = maximum(nextMinCollateralOracle, nextMinCollateralSpot, nextMinCollateralStored)
   const nextMaxRemoveCollateral = maximum(
@@ -124,10 +124,10 @@ export default function Repay({ pair }: RepayProps) {
     displayRemoveValue.toBigNumber(pair.collateral.tokenInfo.decimals)
   )
 
-  const nextMaxBorrowableOracle = nextUserCollateralAmount.mulDiv(e10(16).mul('75'), pair.oracleExchangeRate)
-  const nextMaxBorrowableSpot = nextUserCollateralAmount.mulDiv(e10(16).mul('75'), pair.spotExchangeRate)
+  const nextMaxBorrowableOracle = nextUserCollateralAmount.mulDiv(e10(16).mul('67'), pair.oracleExchangeRate)
+  const nextMaxBorrowableSpot = nextUserCollateralAmount.mulDiv(e10(16).mul('67'), pair.spotExchangeRate)
   const nextMaxBorrowableStored = nextUserCollateralAmount.mulDiv(
-    e10(16).mul('75'),
+    e10(16).mul('67'),
     displayUpdateOracle ? pair.oracleExchangeRate : pair.currentExchangeRate
   )
   const nextMaxBorrowMinimum = minimum(nextMaxBorrowableOracle, nextMaxBorrowableSpot, nextMaxBorrowableStored)

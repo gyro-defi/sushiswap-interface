@@ -231,9 +231,9 @@ export function useKashiPairs(addresses = []) {
 
         // The user's maximum borrowable amount based on the collateral provided, using all three oracle values
         pair.maxBorrowable = {
-          oracle: pair.userCollateralAmount.value.mulDiv(e10(16).mul('75'), pair.oracleExchangeRate),
-          spot: pair.userCollateralAmount.value.mulDiv(e10(16).mul('75'), pair.spotExchangeRate),
-          stored: pair.userCollateralAmount.value.mulDiv(e10(16).mul('75'), pair.currentExchangeRate),
+          oracle: pair.userCollateralAmount.value.mulDiv(e10(16).mul('67'), pair.oracleExchangeRate),
+          spot: pair.userCollateralAmount.value.mulDiv(e10(16).mul('67'), pair.spotExchangeRate),
+          stored: pair.userCollateralAmount.value.mulDiv(e10(16).mul('67'), pair.currentExchangeRate),
         }
 
         pair.maxBorrowable.minimum = minimum(
