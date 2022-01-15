@@ -178,7 +178,7 @@ const PairLayout = ({ children }) => {
             </div>
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{i18n._(t`LTV`)}</div>
-              <div className="text-lg text-high-emphesis">75%</div>
+              <div className="text-lg text-high-emphesis">67%</div>
             </div>
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{i18n._(t`Total`)}</div>
