@@ -36,17 +36,39 @@ const BLACKLISTED_ORACLES = ['0x8f2CC3376078568a04eBC600ae5F0a036DBfd812']
 export function useKashiPairAddresses(): string[] {
   const bentoBoxContract = useBentoBoxContract()
   const { chainId } = useActiveWeb3React()
-  const useEvents = chainId && chainId !== ChainId.BSC && chainId !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
   // const allTokens = useAllTokens()
+
+  const useConstant = chainId == ChainId.BSC_TESTNET
+
+  const useEvents =
+    chainId &&
+    chainId !== ChainId.BSC &&
+    chainId !== ChainId.BSC_TESTNET &&
+    chainId !== ChainId.MATIC &&
+    chainId !== ChainId.ARBITRUM
+
+  const constantData = [
+    {
+      cloneAddress: '0xb2078dA13CafB65Ff09B9629B54074bE7A502Bc2',
+      data: '0x00000000000000000000000060290cf09907e9cee35dadbcac843788086f65b8000000000000000000000000dab5d4634da56f3d5e84dc9e908bf9f7b8610e2700000000000000000000000096c87ef394953198a8af44c3b592f59c4d3b15ac0000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000002000000000000000000000000037dce4361cc268bd35817c7e6c025f90beae24e4',
+    },
+  ]
+
   const events = useQueryFilter({
     chainId,
     contract: bentoBoxContract,
     event: bentoBoxContract && bentoBoxContract.filters.LogDeploy(KASHI_ADDRESS[chainId]),
-    shouldFetch: useEvents && featureEnabled(Feature.KASHI, chainId),
+    shouldFetch: !useConstant && useEvents && featureEnabled(Feature.KASHI, chainId),
   })
-  const clones = useClones({ chainId, shouldFetch: !useEvents })
+
+  const clones = useClones({ chainId, shouldFetch: !useEvents && !useConstant })
+
   return (
-    useEvents ? events?.map((event) => ({ address: event.args.cloneAddress, data: event.args.data })) : clones
+    useConstant
+      ? constantData?.map((res) => ({ address: res.cloneAddress, data: res.data }))
+      : useEvents
+      ? events?.map((event) => ({ address: event.args.cloneAddress, data: event.args.data }))
+      : clones
   )?.reduce((previousValue, currentValue) => {
     try {
       const [collateral, asset, oracle, oracleData] = defaultAbiCoder.decode(
